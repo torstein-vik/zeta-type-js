@@ -33,9 +33,9 @@ const delimited = (delimiter, parser) => pair('', []).or(parser.bind((v) => many
 
 const digit   = any([0,1,2,3,4,5,6,7,8,9].map((n) => pair(n + "", n)));
 
-const natural = some(digit).bind((digs) => P.Return(digs.reverse().map((d, i) => d * Math.pow(10, i)).reduce((x, y) => x + y, 0)))
+const natural = some(digit).bind((digs) => P.Return(digs.reverse().map((d, i) => d * Math.pow(10, i)).reduce((x, y) => x + y, 0)));
 
-const integer = natural.or(expect('-').bind(() => P.natural.bind((n) => P.Return(-n))))
+const integer = natural.or(expect('-').bind(() => P.natural.bind((n) => P.Return(-n))));
 
 const spaces = many(any([' ', '\n', '\t', ''].map(text)));
 
@@ -60,4 +60,5 @@ module.exports = {
     digit:     digit,
     natural:   natural,
     integer:   integer,
+    spaces:    spaces,
 }
